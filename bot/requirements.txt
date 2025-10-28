@@ -1,7 +1,7 @@
 annotated-types==0.7.0
 anthropic==0.40.0
 anyio==4.6.2.post1
-atproto==0.0.55
+atproto==0.0.61
 aws-lambda-powertools==3.3.0
 beautifulsoup4==4.12.3
 boto3==1.35.75
@@ -20,7 +20,7 @@ httpx==0.27.2
 idna==3.10
 jiter==0.8.0
 jmespath==1.0.1
-libipld==3.0.0
+libipld==3.0.1
 pycparser==2.22
 pydantic==2.10.3
 pydantic_core==2.27.1

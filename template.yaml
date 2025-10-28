@@ -4,13 +4,13 @@ Transform: AWS::Serverless-2016-10-31
 Globals:
   Function:
     Tags:
-      project: "skeetbot shitposting"
+      project: "snarkbot shitposting"
 Resources:
   AwsWhatsNew:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: python3.13
-      Handler: skeetbot.lambda_handler
+      Handler: snarkbot.lambda_handler
       CodeUri: ./bot
       Timeout: 200
       MemorySize: 624
@@ -18,7 +18,7 @@ Resources:
         Variables:
           PostsTableName: !Ref AwsNewsRecentPostsTable
           PostRecencyThreshold: "7000"
-          POWERTOOLS_SERVICE_NAME: skeetbot
+          POWERTOOLS_SERVICE_NAME: snarkbot
           POWERTOOLS_LOG_LEVEL: INFO
       Events:
         CheckForNewPostsScheduledEvent:
@@ -39,7 +39,7 @@ Resources:
               - ssm:GetParametersByPath
             Resource:
               - '*'
-              - 'arn:aws:ssm:::parameter/skeetbot/*'
+              - 'arn:aws:ssm:::parameter/snarkbot/*'
   AwsNewsRecentPostsTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -51,5 +51,68 @@ Resources:
         - AttributeName: guid
           KeyType: HASH
       Tags:
-        - Value: "skeetbot shitposting"
+        - Value: "snarkbot shitposting"
           Key: "project"
+
+  # CloudWatch Alarms
+  HighAnthropicUsageAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub ${AWS::StackName}-HighAnthropicUsage
+      AlarmDescription: Alerts when Lambda makes more than 10 Anthropic API calls
+      MetricName: AnthropicRequests
+      Namespace: !Sub ${AWS::StackName}
+      Statistic: Sum
+      Period: 300  # 5 minutes
+      EvaluationPeriods: 1
+      Threshold: 10
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+
+  FailedPostsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub ${AWS::StackName}-FailedPosts
+      AlarmDescription: Alerts when posts fail after max retries
+      MetricName: FailedPosts
+      Namespace: !Sub ${AWS::StackName}
+      Statistic: Sum
+      Period: 300  # 5 minutes
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  LambdaErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub ${AWS::StackName}-LambdaErrors
+      AlarmDescription: Alerts on Lambda function errors
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref AwsWhatsNew
+      Statistic: Sum
+      Period: 300  # 5 minutes
+      EvaluationPeriods: 1
+      Threshold: 3
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  LambdaDurationAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub ${AWS::StackName}-LambdaDuration
+      AlarmDescription: Alerts when Lambda runs longer than 30 seconds
+      MetricName: Duration
+      Namespace: AWS/Lambda
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref AwsWhatsNew
+      Statistic: Average
+      Period: 300  # 5 minutes
+      EvaluationPeriods: 1
+      Threshold: 30000  # 30 seconds in milliseconds
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching

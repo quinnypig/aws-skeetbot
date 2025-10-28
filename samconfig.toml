@@ -1,8 +1,8 @@
 version = 0.1
 [default.deploy.parameters]
-stack_name = "skeetbot"
+stack_name = "snarkbot"
 resolve_s3 = true
-s3_prefix = "skeetbot"
+s3_prefix = "snarkbot"
 region = "us-west-2"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
