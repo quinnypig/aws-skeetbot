@@ -91,7 +91,7 @@ if cloudsplain_it:
         if anthropic_counter is not None:
             anthropic_counter += 1
         message = ai_client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-5",
             max_tokens=1000,
             temperature=0,
             system="Do not announce what you are doing, simply do it. DO NOT LABEL IT AS A CLAUDE SUMMARY. If the supplied prompt is empty or contains garbage, return an empty set instead of a refusal.",
