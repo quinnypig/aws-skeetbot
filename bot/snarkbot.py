@@ -150,9 +150,9 @@ def snarkit(entry, payload):
 def process_entry(entry):
     is_recent = within(entry.published_parsed, minutes=recency_threshold)
     is_posted = already_posted(entry.guid)
-    
+
     logger.info(f"Entry check - GUID: {entry.guid}, Recent: {is_recent}, Already posted: {is_posted}")
-    
+
     if is_recent and not is_posted:
         logger.info(f"Processing new entry: {entry.guid} - {entry.title}")
         global items
@@ -168,14 +168,29 @@ def process_entry(entry):
                     payload = snarkify(entry.description, trim)
                 else:
                     payload = trim_to_last_word(strip_tags(entry.description), trim)
+
+                # Claim this post FIRST with a conditional write to prevent race conditions
+                try:
+                    posts_table.put_item(
+                        Item={
+                            "guid": entry.guid,
+                            "title": entry.title,
+                            "link": entry.link,
+                        },
+                        ConditionExpression="attribute_not_exists(guid)"
+                    )
+                    logger.info(f"Successfully claimed {entry.guid} in DynamoDB")
+                except Exception as claim_error:
+                    # Another Lambda instance already claimed this post
+                    if "ConditionalCheckFailedException" in str(claim_error):
+                        logger.info(f"Post {entry.guid} already claimed by another instance, skipping")
+                        return True
+                    else:
+                        # Other DynamoDB error, re-raise
+                        raise claim_error
+
+                # NOW post to Bluesky (we've already claimed it)
                 snarkit(entry, payload)
-                posts_table.put_item(
-                    Item={
-                        "guid": entry.guid,
-                        "title": entry.title,
-                        "link": entry.link,
-                    }
-                )
                 break
             except RateLimitExceededError:
                 logger.error("Rate limit exceeded, stopping execution.")
