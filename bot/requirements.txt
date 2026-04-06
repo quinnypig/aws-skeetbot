@@ -19,7 +19,7 @@ beautifulsoup4==4.14.3
     # via
     #   -r requirements_unpinned.txt
     #   strip-tags
-boto3==1.42.25
+boto3==1.42.84
     # via -r requirements_unpinned.txt
 botocore==1.42.25
     # via
