@@ -82,7 +82,7 @@ jiter==0.13.0
     # via
     #   -r requirements_unpinned.txt
     #   anthropic
-jmespath==1.0.1
+jmespath==1.1.0
     # via
     #   -r requirements_unpinned.txt
     #   aws-lambda-powertools
