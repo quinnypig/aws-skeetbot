@@ -78,7 +78,7 @@ idna==3.11
     #   -r requirements_unpinned.txt
     #   anyio
     #   httpx
-jiter==0.13.0
+jiter==0.14.0
     # via
     #   -r requirements_unpinned.txt
     #   anthropic
