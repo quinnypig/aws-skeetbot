@@ -92,7 +92,7 @@ libipld==3.3.2
     # via
     #   -r requirements_unpinned.txt
     #   atproto
-pycparser==2.23
+pycparser==3.0
     # via
     #   -r requirements_unpinned.txt
     #   cffi
