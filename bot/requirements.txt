@@ -152,7 +152,7 @@ webencodings==0.5.1
     # via
     #   -r requirements_unpinned.txt
     #   html5lib
-websockets==15.0.1
+websockets==16.0
     # via
     #   -r requirements_unpinned.txt
     #   atproto
