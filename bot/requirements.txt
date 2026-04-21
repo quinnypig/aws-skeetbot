@@ -73,7 +73,7 @@ httpx==0.28.1
     #   -r requirements_unpinned.txt
     #   anthropic
     #   atproto
-idna==3.11
+idna==3.12
     # via
     #   -r requirements_unpinned.txt
     #   anyio
