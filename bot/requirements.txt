@@ -40,7 +40,7 @@ click==8.3.2
     #   -r requirements_unpinned.txt
     #   atproto
     #   strip-tags
-cryptography==46.0.7
+cryptography==47.0.0
     # via
     #   -r requirements_unpinned.txt
     #   atproto
