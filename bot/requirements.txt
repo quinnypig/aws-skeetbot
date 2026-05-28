@@ -88,7 +88,7 @@ jmespath==1.1.0
     #   aws-lambda-powertools
     #   boto3
     #   botocore
-libipld==3.3.2
+libipld==3.4.1
     # via
     #   -r requirements_unpinned.txt
     #   atproto
