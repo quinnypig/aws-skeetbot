@@ -15,7 +15,7 @@ atproto==0.0.72
     # via -r requirements_unpinned.txt
 aws-lambda-powertools==3.34.0
     # via -r requirements_unpinned.txt
-beautifulsoup4==4.14.3
+beautifulsoup4==4.15.0
     # via
     #   -r requirements_unpinned.txt
     #   strip-tags
