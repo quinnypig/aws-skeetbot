@@ -54,7 +54,7 @@ dnspython==2.8.0
     #   atproto
 docstring-parser==0.18.0
     # via anthropic
-feedparser==6.0.12
+feedparser==6.0.14
     # via -r requirements_unpinned.txt
 h11==0.16.0
     # via
