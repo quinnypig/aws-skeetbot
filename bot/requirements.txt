@@ -35,7 +35,7 @@ cffi==2.1.1
     # via
     #   -r requirements_unpinned.txt
     #   cryptography
-click==8.4.1
+click==8.5.0
     # via
     #   -r requirements_unpinned.txt
     #   atproto
