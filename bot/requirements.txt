@@ -148,7 +148,7 @@ urllib3==2.6.3
     # via
     #   -r requirements_unpinned.txt
     #   botocore
-webencodings==0.5.1
+webencodings==0.6.1
     # via
     #   -r requirements_unpinned.txt
     #   html5lib
