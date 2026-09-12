@@ -109,7 +109,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements_unpinned.txt
     #   botocore
-s3transfer==0.17.1
+s3transfer==0.19.2
     # via
     #   -r requirements_unpinned.txt
     #   boto3
