@@ -13,7 +13,7 @@ anyio==4.15.1
     #   httpx
 atproto==0.0.72
     # via -r requirements_unpinned.txt
-aws-lambda-powertools==3.34.0
+aws-lambda-powertools==3.35.0
     # via -r requirements_unpinned.txt
 beautifulsoup4==4.15.0
     # via
