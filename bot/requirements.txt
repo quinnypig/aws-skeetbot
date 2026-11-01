@@ -6,7 +6,7 @@ annotated-types==0.8.0
     #   pydantic
 anthropic==2.3.0
     # via -r requirements_unpinned.txt
-anyio==4.15.1
+anyio==4.16.0
     # via
     #   -r requirements_unpinned.txt
     #   anthropic
