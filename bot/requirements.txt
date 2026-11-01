@@ -105,7 +105,7 @@ pydantic-core==2.50.2
     # via
     #   -r requirements_unpinned.txt
     #   pydantic
-python-dateutil==3.0.0
+python-dateutil==4.0.0
     # via
     #   -r requirements_unpinned.txt
     #   botocore
