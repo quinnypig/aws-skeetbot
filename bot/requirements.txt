@@ -101,7 +101,7 @@ pydantic==2.14.2
     #   -r requirements_unpinned.txt
     #   anthropic
     #   atproto
-pydantic-core==2.50.2
+pydantic-core==2.50.3
     # via
     #   -r requirements_unpinned.txt
     #   pydantic
