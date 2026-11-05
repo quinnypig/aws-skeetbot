@@ -96,7 +96,7 @@ pycparser==3.12
     # via
     #   -r requirements_unpinned.txt
     #   cffi
-pydantic==2.14.2
+pydantic==2.14.3
     # via
     #   -r requirements_unpinned.txt
     #   anthropic
