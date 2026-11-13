@@ -11,7 +11,7 @@ anyio==4.16.0
     #   -r requirements_unpinned.txt
     #   anthropic
     #   httpx
-atproto==0.0.73
+atproto==0.0.74
     # via -r requirements_unpinned.txt
 aws-lambda-powertools==3.40.0
     # via -r requirements_unpinned.txt
