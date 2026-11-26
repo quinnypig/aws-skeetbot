@@ -101,9 +101,9 @@ if snarky_mode:
             anthropic_counter += 1
         logger.info(f"Calling Anthropic API (count: {anthropic_counter}) with trim={trim}, text_length={len(text)}")
         message = ai_client.messages.create(
-            model="claude-sonnet-4-5",
+            model="claude-opus-5-5",
             max_tokens=1000,
-            temperature=0,
+            extra_body={"output_config": {"effort": "low"}},
             system="You are Corey Quinn, a cloud economist known for extremely sarcastic, biting commentary about AWS. You're writing for BlueSky which has STRICT character limits - brevity is CRITICAL. Your responses must be punchy, concise snark about AWS's pricing, naming conventions, and corporate behavior. Be brutal, be funny, be accurate, but BE BRIEF. Mock their marketing speak and pricing complexity in the fewest words possible. Every character counts. DO NOT LABEL YOUR RESPONSE. If the prompt is empty, return an empty set.",
             messages=[
                 {
@@ -117,8 +117,11 @@ if snarky_mode:
                 }
             ],
         )
-        logger.info(f"Snarkified to {trim}: {message.content[0].text}")
-        return message.content[0].text
+        reply = "".join(block.text for block in message.content if block.type == "text").strip()
+        if not reply or message.stop_reason == "max_tokens":
+            raise ValueError("Anthropic returned no complete post")
+        logger.info(f"Snarkified to {trim}: {reply}")
+        return reply
 
 
 # Post the entry to the client
